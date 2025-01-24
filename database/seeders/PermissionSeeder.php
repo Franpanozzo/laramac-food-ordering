@@ -15,13 +15,13 @@ class PermissionSeeder extends Seeder
             'create',
             'update',
             'delete',
-            'restore',
-            'forceDelete',
         ];
 
         $resources = [
             'user',
             'restaurant',
+            'category',
+            'product',
         ];
 
         collect($resources)

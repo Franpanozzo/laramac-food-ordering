@@ -38,8 +38,16 @@ class UserSeeder extends Seeder
 
         $vendor->roles()->sync(Role::where('name', RoleName::VENDOR->value)->first());
 
+        $cityId = City::where('name', 'Vilnius')->value('id');
+
+        if (! $cityId) {
+            // Si la ciudad no existe, puedes crearla aquí o lanzar una excepción
+            $city = City::create(['name' => 'Vilnius']);
+            $cityId = $city->id;
+        }
+
         $vendor->restaurant()->create([
-            'city_id' => City::where('name', 'Aalborg')->value('id'),
+            'city_id' => $cityId,
             'name' => 'Restaurant 001',
             'address' => 'Address SJV14',
         ]);
