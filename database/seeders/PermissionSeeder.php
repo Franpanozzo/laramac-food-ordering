@@ -28,5 +28,7 @@ class PermissionSeeder extends Seeder
             ->crossJoin($actions)
             ->map(fn ($set) => implode('.', $set))
             ->each(fn ($permission) => Permission::create(['name' => $permission]));
+
+        Permission::create(['name' => 'cart.add']);
     }
 }

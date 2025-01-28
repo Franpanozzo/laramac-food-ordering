@@ -6,7 +6,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 
 class RouteServiceProvider extends ServiceProvider
 {
-    public const HOME = '/';  // Changed from '/dashboard'
+    public const HOME = '/';  // Changed from '/home'
 
     // ... rest of the file
 }
