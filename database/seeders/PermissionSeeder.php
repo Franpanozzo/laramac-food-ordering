@@ -22,6 +22,7 @@ class PermissionSeeder extends Seeder
             'restaurant',
             'category',
             'product',
+            'order',
         ];
 
         collect($resources)
