@@ -62,6 +62,13 @@ console.log(page.props.auth.permissions.includes('product.viewAny'));
                             >
                                 My Orders
                             </NavLink>
+                            <NavLink
+                                v-if="can('user.create') && $page.props.auth.is_vendor"
+                                :href="route('vendor.staff-members.index')"
+                                :active="route().current('vendor.staff-members.index')"
+                            >
+                                Staff Management
+                            </NavLink>
                             </div>
                         </div>
 

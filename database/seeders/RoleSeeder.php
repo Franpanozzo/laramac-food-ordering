@@ -18,6 +18,7 @@ class RoleSeeder extends Seeder
         $this->createAdminRole();
         $this->createVendorRole();
         $this->createCustomerRole();
+        $this->createStaffRole();
     }
 
     protected function createRole(RoleName $role, Collection $permissions): void
@@ -41,9 +42,11 @@ class RoleSeeder extends Seeder
         $permissions = Permission::query()
             ->orWhere('name', 'like', 'category.%')
             ->orWhere('name', 'like', 'product.%')
-            ->pluck('id');
+            ->orWhereIn('name', [
+                'user.create',
+            ]);
 
-        $this->createRole(RoleName::VENDOR, $permissions);
+        $this->createRole(RoleName::VENDOR, $permissions->pluck('id'));
     }
 
     protected function createCustomerRole(): void
@@ -55,5 +58,10 @@ class RoleSeeder extends Seeder
         ])->get();
 
         $this->createRole(RoleName::CUSTOMER, $permissions);
+    }
+
+    protected function createStaffRole(): void
+    {
+        $this->createRole(RoleName::STAFF, collect());
     }
 }
