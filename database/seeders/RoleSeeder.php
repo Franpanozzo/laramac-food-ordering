@@ -43,7 +43,9 @@ class RoleSeeder extends Seeder
             ->orWhere('name', 'like', 'category.%')
             ->orWhere('name', 'like', 'product.%')
             ->orWhereIn('name', [
+                'user.viewAny',
                 'user.create',
+                'user.delete',
             ]);
 
         $this->createRole(RoleName::VENDOR, $permissions->pluck('id'));
@@ -62,6 +64,10 @@ class RoleSeeder extends Seeder
 
     protected function createStaffRole(): void
     {
-        $this->createRole(RoleName::STAFF, collect());
+        $permissions = Permission::whereIn('name', [
+            'order.update',
+        ])->get();
+
+        $this->createRole(RoleName::STAFF, $permissions);
     }
 }
